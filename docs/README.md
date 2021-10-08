@@ -18,5 +18,5 @@
 
 ### [Open Source Licenses](https://github.com/RadiantDerg/AliceModLoader/blob/master/docs/OpenSource.md)
 
-<h5>† This has only been actively tested on with Episode 2. While Episode 1 is technically already supported, it's limited to Sonic_xp.exe, as Sonic_vis.exe was intended for Windows Vista and up, since it relies on Direct3D9Ex instead of Direct3D9</h5>
-<h5>†† *Without having to rely on an external injection program **AND** without having to completely patch the game executables themselves* </h5>
+<h5>† This has only been actively tested on with Episode 2. While Episode 1 is technically already supported, it's limited to sonic_xp.exe, as sonic_vis.exe is intended for Windows Vista and up, relying on Direct3D9Ex instead of Direct3D9</h5>
+<h5>†† Without having to rely on an external injection program AND without the need to patch the game executables themselves </h5>
