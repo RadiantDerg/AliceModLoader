@@ -1,12 +1,16 @@
-#include <cstdio>
 #include "D3D9Hook.h"
 #include "AliceLoader.h"
-#define EXPORT comment(linker, "/EXPORT:" __FUNCTION__ "=" __FUNCDNAME__)
 
 void* (WINAPI* Direct3DCreate9Ptr)(UINT SDKVersion);
 
 void HookD3D9()
 {
+#if _DEBUG
+	// Wait for a debugger to attach. Thanks, Stack Overflow! https://stackoverflow.com/a/35018030
+	while (AliceLoader::waitForDebugger && !::IsDebuggerPresent())
+		::Sleep(100);
+#endif 
+
 	AliceLoader::TestFunc();
 
 	wchar_t windir[MAX_PATH];

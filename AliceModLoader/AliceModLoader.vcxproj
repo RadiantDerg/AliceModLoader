@@ -172,19 +172,21 @@
   <ItemGroup>
     <ClInclude Include="..\..\Sonic 4 DLL mods\Dependencies\INIReader.h" />
     <ClInclude Include="AliceLoader.h" />
+    <ClInclude Include="AML_FS.h" />
     <ClInclude Include="Dependencies\Detours\include\detours.h" />
     <ClInclude Include="Dependencies\Detours\include\detver.h" />
     <ClInclude Include="Dependencies\Detours\include\syelog.h" />
     <ClInclude Include="Dependencies\Helpers.h" />
     <ClInclude Include="D3D9Hook.h" />
-    <ClInclude Include="LoaderConfig.h" />
+    <ClInclude Include="Config.h" />
     <ClInclude Include="Pch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AliceLoader.cpp" />
+    <ClCompile Include="AML_FS.cpp" />
     <ClCompile Include="D3D9Hook.cpp" />
     <ClCompile Include="DllMain.cpp" />
-    <ClCompile Include="LoaderConfig.cpp" />
+    <ClCompile Include="Config.cpp" />
     <ClCompile Include="Pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClInclude Include="Pch.h" />
     <ClInclude Include="Dependencies\Detours\include\detours.h">
       <Filter>Dependencies\Detours\include</Filter>
     </ClInclude>
@@ -23,21 +22,34 @@
     <ClInclude Include="AliceLoader.h">
       <Filter>LoaderMain</Filter>
     </ClInclude>
-    <ClInclude Include="LoaderConfig.h">
+    <ClInclude Include="Config.h">
       <Filter>LoaderMain</Filter>
+    </ClInclude>
+    <ClInclude Include="Pch.h">
+      <Filter>DLL</Filter>
+    </ClInclude>
+    <ClInclude Include="AML_FS.h">
+      <Filter>LoaderMain\Helpers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="DllMain.cpp" />
-    <ClCompile Include="Pch.cpp" />
     <ClCompile Include="D3D9Hook.cpp">
       <Filter>LoaderMain\Hooks</Filter>
     </ClCompile>
     <ClCompile Include="AliceLoader.cpp">
       <Filter>LoaderMain</Filter>
     </ClCompile>
-    <ClCompile Include="LoaderConfig.cpp">
+    <ClCompile Include="Config.cpp">
       <Filter>LoaderMain</Filter>
+    </ClCompile>
+    <ClCompile Include="DllMain.cpp">
+      <Filter>DLL</Filter>
+    </ClCompile>
+    <ClCompile Include="Pch.cpp">
+      <Filter>DLL</Filter>
+    </ClCompile>
+    <ClCompile Include="AML_FS.cpp">
+      <Filter>LoaderMain\Helpers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -64,6 +76,12 @@
     </Filter>
     <Filter Include="LoaderMain\Hooks">
       <UniqueIdentifier>{864c1aa2-dbe9-49ac-8950-81d4bfa0b6a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DLL">
+      <UniqueIdentifier>{fe51a12f-e71a-4060-b954-b346c04214e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LoaderMain\Helpers">
+      <UniqueIdentifier>{72aaf83c-3c02-4fef-afa9-24761f16c3ff}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
