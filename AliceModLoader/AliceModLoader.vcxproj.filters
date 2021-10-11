@@ -31,6 +31,7 @@
     <ClInclude Include="AML_FS.h">
       <Filter>LoaderMain\Helpers</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="D3D9Hook.cpp">
@@ -105,5 +106,8 @@
     <None Include="Dependencies\Detours\lib\x86\detours.pdb">
       <Filter>Dependencies\Detours\lib\x86</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="AliceModLoader.rc" />
   </ItemGroup>
 </Project>

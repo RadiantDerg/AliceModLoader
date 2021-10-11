@@ -6,8 +6,11 @@ public:
 	static bool enableConsole;
 	static bool waitForDebugger;
 
+	static std::string patcherDir;
+
 	static void TestFunc();
 	static void initLoader();
+	static void launchExternalPatcher();
 };
 
 typedef void (InitFunc_t)();

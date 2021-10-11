@@ -22,6 +22,7 @@ void Config::loadConfig()
 	}
 
 	AliceLoader::enableConsole = reader.GetBoolean("Config", "EnableConsole", false);
+	AliceLoader::patcherDir = reader.Get("Config", "PatcherDir", "");
 }
 
 void Config::setConfigPath()

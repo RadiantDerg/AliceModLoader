@@ -104,7 +104,8 @@
       <AdditionalLibraryDirectories>$(ProjectDir)Dependencies\Detours\lib\x86</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy "$(ProjectDir)bin\$(Platform)\$(Configuration)\AliceModLoader.dll" "E:\Games\steamapps\common\Sonic the Hedgehog 4 - EP 2\d3d9.dll" /Y /D /F</Command>
+      <Command>xcopy "$(ProjectDir)bin\$(Platform)\$(Configuration)\AliceModLoader.dll" "E:\Games\steamapps\common\Sonic the Hedgehog 4 - EP 2\d3d9.dll" /Y /D /F
+xcopy "$(ProjectDir)bin\$(Platform)\$(Configuration)\AliceModLoader.dll" "E:\Games\steamapps\common\Sonic the Hedgehog 4 EP 1\d3d9.dll" /Y /D /F</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -180,6 +181,7 @@
     <ClInclude Include="D3D9Hook.h" />
     <ClInclude Include="Config.h" />
     <ClInclude Include="Pch.h" />
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AliceLoader.cpp" />
@@ -203,6 +205,9 @@
   <ItemGroup>
     <None Include="Dependencies\Detours\lib\x64\detours.pdb" />
     <None Include="Dependencies\Detours\lib\x86\detours.pdb" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="AliceModLoader.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

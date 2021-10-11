@@ -8,6 +8,7 @@
 
 #include <cstdint>
 #include <cstdio>
+#include <iostream>
 
 #include "Helpers.h"
 #include "INIReader.h"

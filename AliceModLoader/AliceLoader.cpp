@@ -3,6 +3,7 @@
 
 bool AliceLoader::enableConsole = false;
 bool AliceLoader::waitForDebugger = false; // Change this to true if you need to attach
+std::string AliceLoader::patcherDir;
 
 void AliceLoader::TestFunc() // Yeah, I'm aware this is stupid.
 {
@@ -31,6 +32,25 @@ void AliceLoader::TestFunc() // Yeah, I'm aware this is stupid.
 	else
 		printf("Unable to load EP2Debug\n\n");
 	
+}
+
+void AliceLoader::launchExternalPatcher()
+{
+	if (!patcherDir.empty())
+	{
+		PROCESS_INFORMATION pi = {0};
+		STARTUPINFO si = { 0 };
+
+		bool patchPrc = CreateProcess(TEXT(patcherDir.c_str()), NULL, NULL, NULL, FALSE, NULL, NULL, NULL, &si, &pi);
+		if (!patchPrc)
+			std::cout << "Error creating patcher process. Error code: " << GetLastError() << std::endl;
+		
+		WaitForSingleObject(pi.hProcess, INFINITE);
+
+		CloseHandle(pi.hThread);
+		CloseHandle(pi.hProcess);
+	}
+	else printf("External patcher not listed in config file, skipping\n\n");
 }
 
 void AliceLoader::initLoader()
