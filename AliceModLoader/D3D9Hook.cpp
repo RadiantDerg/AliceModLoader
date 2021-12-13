@@ -6,13 +6,28 @@ HRESULT* (WINAPI* Direct3DCreate9ExPtr)(UINT SDKVersion, void** d3d);
 
 void HookD3D9()
 {
-#if _DEBUG
 	// Wait for a debugger to attach. Thanks, Stack Overflow! https://stackoverflow.com/a/35018030
-	while (AliceLoader::waitForDebugger && !::IsDebuggerPresent())
-		::Sleep(100);
-#endif 
+	if (AliceLoader::waitForDebugger)
+	{
+		printf("Waiting for debugger to attach... (Press ESCAPE to skip)\n\n");
+		while (!::IsDebuggerPresent())
+		{
+			// Cancel wait if user preses escape
+			if (GetAsyncKeyState(VK_ESCAPE) & 1)
+			{
+				AliceLoader::waitForDebugger = false;
+				goto SkipWait;
+			}
+			::Sleep(100);
+		}
+	}
 
-	AliceLoader::TestFunc();
+SkipWait:
+	if (AliceLoader::skipDLLs)
+		printf("Loading of external modules is disabled, skipping...\n");
+	else
+		AliceLoader::TestFunc();
+
 	AliceLoader::launchExternalPatcher();
 
 	wchar_t windir[MAX_PATH];

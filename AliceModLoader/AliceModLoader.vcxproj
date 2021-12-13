@@ -146,7 +146,9 @@ xcopy "$(ProjectDir)bin\$(Platform)\$(Configuration)\AliceModLoader.dll" "E:\Gam
       <AdditionalLibraryDirectories>$(ProjectDir)Dependencies;$(ProjectDir)Dependencies\Detours\lib\x86</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy "$(ProjectDir)bin\$(Platform)\$(Configuration)\AliceModLoader.dll" "E:\Games\steamapps\common\Sonic the Hedgehog 4 - EP 2\d3d9.dll" /Y /D /F</Command>
+      <Command>xcopy "$(ProjectDir)bin\$(Platform)\$(Configuration)\AliceModLoader.dll" "E:\Games\steamapps\common\Sonic the Hedgehog 4 - EP 2\d3d9.dll" /Y /D /F
+xcopy "$(ProjectDir)bin\$(Platform)\$(Configuration)\AliceModLoader.dll" "E:\Games\steamapps\common\Sonic the Hedgehog 4 EP 1\d3d9.dll" /Y /D /F
+xcopy "$(ProjectDir)bin\$(Platform)\$(Configuration)\AliceModLoader.dll" "$(SolutionDir)UpdateServer\d3d9.dll" /Y /D /F</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
