@@ -64,8 +64,9 @@ void AliceLoader::identifyApp()
 		if (AliceLoader::fpsTarget != 60.f)
 		{
 			printf("Setting target refresh rate to %.f\n", AliceLoader::fpsTarget);
-			WRITE_MEMORY(0x6F146C, float, AliceLoader::fpsTarget); break;
+			WRITE_MEMORY(0x6F146C, float, AliceLoader::fpsTarget);
 		}
+		break;
 	}
 	case 1:
 	{
@@ -73,11 +74,12 @@ void AliceLoader::identifyApp()
 		if (AliceLoader::fpsTarget != 60.f)
 		{
 			printf("Setting target refresh rate to %.f\n", AliceLoader::fpsTarget);
-			WRITE_MEMORY(0x5F247C, float, AliceLoader::fpsTarget); break;
+			WRITE_MEMORY(0x5F247C, float, AliceLoader::fpsTarget);
 		}
+		break;
 	}
 	default:
-	{ printf("No known game detected!\n"); AliceLoader::skipDLLs = true; break; }
+	{ printf("No known game detected!\n"); AliceLoader::skipDLLs = false; break; }
 	}
 }
 
