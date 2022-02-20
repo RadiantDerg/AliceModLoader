@@ -1,7 +1,7 @@
 # AliceModLoader
  **AliceModLoader (AML)** is a *very basic DLL mod loader* for the Sonic The Hedgehog 4 PC games.†
  
- This loader is purposefully named similarly to other existing loaders for PC Sonic games, the name **"Alice"** coming from Sonic 4 Episode 2's internal NN Application Library name.
+ This loader is purposefully named similarly to other existing loaders for PC Sonic games, the name **"Alice"** coming from Sonic 4 Episode 2's internal NN Application name.
 
 ### Notice:
  I do **NOT** consider this to be in a publicly usable state at all. **AML is currently hard-coded to just load 2 modules**,
