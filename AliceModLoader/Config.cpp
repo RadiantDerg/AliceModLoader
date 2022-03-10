@@ -6,10 +6,10 @@
 
 std::string Config::configPath;
 
-void Config::loadConfig()
+void Config::LoadConfig()
 {
 	if (configPath.empty())
-		Config::setConfigPath();
+		Config::GetConfigPath();
 
 	printf("Loading AML Configuration\n");
 
@@ -26,10 +26,11 @@ void Config::loadConfig()
 	AliceLoader::patcherDir      = reader.Get("Config", "PatcherDir", "");
 	AliceLoader::skipDLLs        = reader.GetBoolean("Config", "DisableCodeMods", false);
 	AliceLoader::fpsTarget       = reader.GetFloat("Config", "TargetFPS", 60.f);
+
 }
 
-void Config::setConfigPath()
+void Config::GetConfigPath()
 {
-	std::string mDir = AML_FS::getModuleDir() + "\\AML\\";
+	std::string mDir = AML_FS::GetModuleDir() + "\\AML\\";
 	Config::configPath = mDir;
 }

@@ -12,9 +12,12 @@ public:
 	static std::string patcherDir;
 
 	static void TestFunc();
-	static void initLoader();
-	static void launchExternalPatcher();
-	static void identifyApp();
+	static void InitLoader();
+	static void LaunchExternalPatcher();
+	static void IdentifyApp();
+
+	static void LoadExternalModule(std::string file, std::string relativePath = "", std::string name = "");
+	static void LoadExternalModule_Direct(std::string filePath);
 };
 
 typedef void (InitFunc_t)();

@@ -6,7 +6,7 @@ BOOL WINAPI DllMain(_In_ HINSTANCE instance, _In_ DWORD reason, _In_ LPVOID rese
 	switch (reason)
 	{
 	case DLL_PROCESS_ATTACH:
-		AliceLoader::initLoader();
+		AliceLoader::InitLoader();
 
 		break;
 	case DLL_PROCESS_DETACH:

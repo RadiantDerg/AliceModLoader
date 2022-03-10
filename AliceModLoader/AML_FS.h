@@ -3,6 +3,6 @@ class AML_FS
 {
 
 public:
-	const static std::string getModuleDir();
+	const static std::string GetModuleDir();
 };
 

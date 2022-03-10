@@ -6,13 +6,13 @@ HRESULT* (WINAPI* Direct3DCreate9ExPtr)(UINT SDKVersion, void** d3d);
 
 void HookD3D9()
 {
-	// Wait for a debugger to attach. Thanks, Stack Overflow! https://stackoverflow.com/a/35018030
+	// Wait for a native debugger to attach. Thanks, Stack Overflow! https://stackoverflow.com/a/35018030
 	if (AliceLoader::waitForDebugger)
 	{
 		printf("Waiting for debugger to attach... (Press ESCAPE to skip)\n\n");
 		while (!::IsDebuggerPresent())
 		{
-			// Cancel wait if user preses escape
+			// Cancel wait if user presses escape
 			if (GetAsyncKeyState(VK_ESCAPE) & 1)
 			{
 				AliceLoader::waitForDebugger = false;
@@ -28,11 +28,13 @@ SkipWait:
 	else
 		AliceLoader::TestFunc();
 
-	AliceLoader::launchExternalPatcher();
+	AliceLoader::LaunchExternalPatcher();
 
+	// Redirect the hooked function calls to the *actual* d3d9.dll
 	wchar_t windir[MAX_PATH];
 	GetSystemDirectoryW(windir, MAX_PATH);
 	wchar_t d3dpath[MAX_PATH];
+
 	_snwprintf(d3dpath, MAX_PATH, L"%s\\d3d9.dll", windir);
 	const HMODULE hmod = LoadLibraryW(d3dpath);
 	Direct3DCreate9Ptr = (decltype(Direct3DCreate9Ptr))GetProcAddress(hmod, "Direct3DCreate9");
