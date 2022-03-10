@@ -133,7 +133,7 @@ void AliceLoader::TestFunc()
 		Arg 3: Friendly name (For console output, defaults to arg 1 if undefined)
 
 		"EP2Debug.dll"           retrieved from:  {ModFolder}/mod.ini, [Mod] DLLFile=""
-		"Mods\\Episode 2 Debug"  retrieved from:  Mod Database
+		"Mods/Episode 2 Debug"   retrieved from:  Mod Database
 		"Episode 2 Debug"        retrieved from:  {ModFolder}/mod.ini, [Description] Title=""
 	*/
 
@@ -149,18 +149,30 @@ void AliceLoader::TestFunc()
 }
 
 
+// TODO: Check if a DLL has already been loaded. 
 void LoadDll(const char* dll)
 {
 	auto hModule = LoadLibraryA(dll);
+
 	if (hModule)
 	{
 		printf(" >> Load Successful!\n");
 
+		// Call the loaded DLL's Init() function.
 		auto* pProc = (InitFunc_t*)GetProcAddress(hModule, "Init");
 		if (pProc)
 			pProc();
+
+		/*if (hModule != hExists)
+		{
+		}
+		else
+		{
+			printf(" >> Failed to load module, it already exists!\n");
+			FreeLibrary(hModule);
+		}*/
 	}
-	else
+	else 
 		printf(" >> Failed to load the module!\n");
 }
 
@@ -171,7 +183,6 @@ void AliceLoader::LoadExternalModule(std::string file, std::string relativePath,
 	printf("Loading module from mod: \"%s\"...\n", name != "" ? name.c_str() : file.c_str());
 	LoadDll(moduleDir.c_str());
 }
-
 
 void AliceLoader::LoadExternalModule_Direct(std::string filePath)
 {
