@@ -5,9 +5,20 @@ class FileService
 public:
 	const static std::string GetModuleDir();
 
-	static bool ContainsWhiteSpace(std::string s)
+	static bool IsEmptyOrWhiteSpace(std::string s)
 	{
-		return std::all_of(s.begin(), s.end(), isspace);
+		if (s.empty() || std::all_of(s.begin(), s.end(), [](char c) {return std::isspace(c); }))
+			return true;
+		else
+			return false;
+	}
+
+	static bool IsEmptyOrWhiteSpace(const char* s)
+	{
+		if (s != NULL && s[0] == '\0')
+			return true;
+		else
+			return false;
 	}
 };
 

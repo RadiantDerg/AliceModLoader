@@ -26,7 +26,6 @@ void Config::LoadConfig()
 	AliceLoader::patcherDir      = reader.Get("Config", "PatcherDir", "");
 	AliceLoader::skipDLLs        = reader.GetBoolean("Config", "DisableCodeMods", false);
 	AliceLoader::fpsTarget       = reader.GetFloat("Config", "TargetFPS", 60.f);
-
 }
 
 void Config::GetAliceFolder()
