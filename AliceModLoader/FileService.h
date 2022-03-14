@@ -1,5 +1,5 @@
 #pragma once
-class AML_FS
+class AMLFileService
 {
 
 public:

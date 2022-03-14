@@ -175,7 +175,7 @@ xcopy "$(ProjectDir)bin\$(Platform)\$(Configuration)\AliceModLoader.dll" "$(Solu
   <ItemGroup>
     <ClInclude Include="..\..\Sonic 4 DLL mods\Dependencies\INIReader.h" />
     <ClInclude Include="AliceLoader.h" />
-    <ClInclude Include="AML_FS.h" />
+    <ClInclude Include="FileService.h" />
     <ClInclude Include="Dependencies\Detours\include\detours.h" />
     <ClInclude Include="Dependencies\Detours\include\detver.h" />
     <ClInclude Include="Dependencies\Detours\include\syelog.h" />
@@ -187,7 +187,7 @@ xcopy "$(ProjectDir)bin\$(Platform)\$(Configuration)\AliceModLoader.dll" "$(Solu
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AliceLoader.cpp" />
-    <ClCompile Include="AML_FS.cpp" />
+    <ClCompile Include="FileService.cpp" />
     <ClCompile Include="D3D9Hook.cpp" />
     <ClCompile Include="DllMain.cpp" />
     <ClCompile Include="Config.cpp" />

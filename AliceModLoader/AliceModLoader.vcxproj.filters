@@ -28,10 +28,10 @@
     <ClInclude Include="Pch.h">
       <Filter>DLL</Filter>
     </ClInclude>
-    <ClInclude Include="AML_FS.h">
-      <Filter>LoaderMain\Helpers</Filter>
-    </ClInclude>
     <ClInclude Include="resource.h" />
+    <ClInclude Include="FileService.h">
+      <Filter>LoaderMain</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="D3D9Hook.cpp">
@@ -49,8 +49,8 @@
     <ClCompile Include="Pch.cpp">
       <Filter>DLL</Filter>
     </ClCompile>
-    <ClCompile Include="AML_FS.cpp">
-      <Filter>LoaderMain\Helpers</Filter>
+    <ClCompile Include="FileService.cpp">
+      <Filter>LoaderMain</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -80,9 +80,6 @@
     </Filter>
     <Filter Include="DLL">
       <UniqueIdentifier>{fe51a12f-e71a-4060-b954-b346c04214e7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="LoaderMain\Helpers">
-      <UniqueIdentifier>{72aaf83c-3c02-4fef-afa9-24761f16c3ff}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

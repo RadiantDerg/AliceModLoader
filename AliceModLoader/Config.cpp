@@ -9,7 +9,7 @@ std::string Config::configPath;
 void Config::LoadConfig()
 {
 	if (configPath.empty())
-		Config::GetConfigPath();
+		Config::GetAliceFolder();
 
 	printf("Loading AML Configuration\n");
 
@@ -29,8 +29,8 @@ void Config::LoadConfig()
 
 }
 
-void Config::GetConfigPath()
+void Config::GetAliceFolder()
 {
-	std::string mDir = AML_FS::GetModuleDir() + "\\AML\\";
+	std::string mDir = AMLFileService::GetModuleDir() + "\\AML\\";
 	Config::configPath = mDir;
 }
