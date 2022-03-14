@@ -144,6 +144,8 @@ void AliceLoader::TestFunc()
 	// Ep2 Debug
 	LoadExternalModule("EP2Debug.dll", "", "Episode 2 Debug");
 
+	LoadExternalModule("", "", "");
+
 
 	printf("\n");
 }
@@ -180,8 +182,13 @@ void AliceLoader::LoadExternalModule(std::string file, std::string relativePath,
 {
 	std::string moduleDir = Config::configPath + relativePath + "\\" + file;
 
-	printf("Loading module from mod: \"%s\"...\n", name != "" ? name.c_str() : file.c_str());
-	LoadDll(moduleDir.c_str());
+	if (file != "" || FileService::ContainsWhiteSpace(file)) 
+	{
+		printf("Loading module from mod: \"%s\"...\n", name != "" ? name.c_str() : file.c_str());
+		LoadDll(moduleDir.c_str());
+	}
+	else
+		printf("WARNING! Module file is undefined! Skipped \"%s\"\n", name != "" ? name.c_str() : "NO MOD NAME");
 }
 
 void AliceLoader::LoadExternalModule_Direct(std::string filePath)

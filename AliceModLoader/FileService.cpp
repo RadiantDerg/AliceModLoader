@@ -3,7 +3,7 @@
 #include <vector>
 #include <fstream>
 
-const std::string AMLFileService::GetModuleDir() // Un-optimal hack solution Xd
+const std::string FileService::GetModuleDir() // Un-optimal hack solution Xd
 {
 	std::vector<TCHAR> lpFilename(MAX_PATH);
 	GetModuleFileName(0, &lpFilename[0], MAX_PATH);

@@ -31,6 +31,6 @@ void Config::LoadConfig()
 
 void Config::GetAliceFolder()
 {
-	std::string mDir = AMLFileService::GetModuleDir() + "\\AML\\";
+	std::string mDir = FileService::GetModuleDir() + "\\AML\\";
 	Config::configPath = mDir;
 }
