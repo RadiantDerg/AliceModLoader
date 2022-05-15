@@ -9,28 +9,11 @@ bool AliceLoader::isDebug = false;
 float AliceLoader::fpsTarget = 60;
 std::string AliceLoader::patcherDir;
 
-/// <summary>
-/// Checks if process memory access is possible at a given address.
-/// </summary>
-/// <param name="pAddress">Pointer address to section</param>
-/// <param name="nSize">Size of the queried section</param>
-/// <returns></returns>
-bool CheckValidity(void* pAddress, size_t nSize)
-{
-	MEMORY_BASIC_INFORMATION mbi;
-	if (VirtualQuery(pAddress, &mbi, sizeof(mbi)))
-	{
-		if (mbi.Protect & (PAGE_EXECUTE_READ | PAGE_READWRITE | PAGE_READONLY))
-			return true;
-	}
-	return false;
-}
-
 
 void AliceLoader::InitLoader()
 {
 #if _DEBUG
-	// For debugging steps taken before the if() statement below.
+	// For debugging steps taken before the if() statement below
 	AliceLoader::isDebug = true;
 	AllocConsole();
 	freopen("CONOUT$", "w", stdout);
@@ -48,8 +31,26 @@ void AliceLoader::InitLoader()
 	AliceLoader::IdentifyApp();
 }
 
+
 /// <summary>
-/// Scan the calling process memory to detect the game, thus set the loader mode.
+/// Checks if process memory access is possible at a given address
+/// </summary>
+/// <param name="pAddress">Pointer address to section</param>
+/// <param name="nSize">Size of the queried section</param>
+/// <returns></returns>
+bool CheckValidity(void* pAddress, size_t nSize)
+{
+	MEMORY_BASIC_INFORMATION mbi;
+	if (VirtualQuery(pAddress, &mbi, sizeof(mbi)))
+	{
+		if (mbi.Protect & (PAGE_EXECUTE_READ | PAGE_READWRITE | PAGE_READONLY))
+			return true;
+	}
+	return false;
+}
+
+/// <summary>
+/// Scan the calling process memory to detect the game, thus set the loader mode
 /// </summary>
 void AliceLoader::IdentifyApp()
 {
@@ -74,6 +75,12 @@ void AliceLoader::IdentifyApp()
 			{
 				printf("Setting target refresh rate to %.f\n", AliceLoader::fpsTarget);
 				WRITE_MEMORY(0x6F146C, float, AliceLoader::fpsTarget);
+
+
+				//WRITE_MEMORY(0x6F6ADC, float, AliceLoader::fpsTarget);	// Another 60.f I think
+				//WRITE_MEMORY(0x742A38, double, AliceLoader::fpsTarget);	// Sus Double
+				
+				WRITE_MEMORY(0x7441F8, float, 0.006944444f);				// Material?
 			}
 			break;
 		}
@@ -92,13 +99,13 @@ void AliceLoader::IdentifyApp()
 		default:
 		{ 
 			printf("No known game detected!\n");
-			AliceLoader::skipDLLs = false; break;
+			AliceLoader::skipDLLs = true; break;
 		}
 	}
 }
 
 /// <summary>
-/// Launches an external program defined in the config file. Intended for use with OSA413's AMBPatcher.
+/// Launches an external program defined in the config file. Intended for use with OSA413's AMBPatcher
 /// </summary>
 void AliceLoader::LaunchExternalPatcher()
 {
@@ -149,7 +156,7 @@ void AliceLoader::TestFunc()
 }
 
 
-// TODO: Check if a DLL has already been loaded. 
+// TODO: Check if a specific DLL has already been loaded
 void LoadDll(const char* dll)
 {
 	auto hModule = LoadLibraryA(dll);
@@ -158,10 +165,14 @@ void LoadDll(const char* dll)
 	{
 		printf(" >> Load Successful!\n");
 
-		// Call the loaded DLL's Init() function.
-		auto* pProc = (InitFunc_t*)GetProcAddress(hModule, "Init");
-		if (pProc)
-			pProc();
+		// Call the loaded DLL's Init() and PostInit() functions
+		auto* pProc_Init = (InitFunc_t*)GetProcAddress(hModule, "Init");
+		if (pProc_Init)
+			pProc_Init();
+
+		auto* pProc_PostInit = (InitFunc_t*)GetProcAddress(hModule, "PostInit");
+		if (pProc_PostInit)
+			pProc_PostInit();
 
 		/*if (hModule != hExists)
 		{
