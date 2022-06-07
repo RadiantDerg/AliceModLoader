@@ -1,12 +1,16 @@
 #include "AliceLoader.h"
 #include "Config.h"
 
-bool AliceLoader::enableConsole = false;
+bool AliceLoader::enableConsole   = false;
 bool AliceLoader::waitForDebugger = false;
-bool AliceLoader::skipDLLs = false;
-bool AliceLoader::isDebug = false;
+bool AliceLoader::skipDLLs        = false;
+bool AliceLoader::isDebug         = false;
 
-float AliceLoader::fpsTarget = 60;
+float AliceLoader::ep1Width     = 1280.f;
+float AliceLoader::ep1Height    = 720.f;
+
+float AliceLoader::ep2FPSTarget = 60.f;
+
 std::string AliceLoader::patcherDir;
 
 
@@ -55,7 +59,7 @@ bool CheckValidity(void* pAddress, size_t nSize)
 void AliceLoader::IdentifyApp()
 {
 	char appName[] = { 0x41, 0x4D, 0x5F, 0x57, 0x49, 0x4E }; // AM_WIN
-	int  address[] = { 0x6F1464, 0x5F2474 }; // S4E2, S4E2_beta8
+	int  address[] = { ASLR(0x575C94), 0x6F1464, 0x5F2474 }; // S4E1, S4E2, S4E2_beta8
 	int i = 0;
 
 	// Test if we can access the given location first, then check if the location contains "AM_WIN"
@@ -70,31 +74,45 @@ void AliceLoader::IdentifyApp()
 	{
 		case 0:
 		{
-			printf("Game: Episode II\n\n");
-			if (AliceLoader::fpsTarget != 60.f)
-			{
-				printf("Setting target refresh rate to %.f\n", AliceLoader::fpsTarget);
-				WRITE_MEMORY(0x6F146C, float, AliceLoader::fpsTarget);
+			printf("Game: Episode I\n\n");
+			AliceLoader::skipDLLs = true;
 
-
-				//WRITE_MEMORY(0x6F6ADC, float, AliceLoader::fpsTarget);	// Another 60.f I think
-				//WRITE_MEMORY(0x742A38, double, AliceLoader::fpsTarget);	// Sus Double
-				
-				WRITE_MEMORY(0x7441F8, float, 0.006944444f);				// Material?
-			}
+			printf("Setting internal resolution to %.fx%.f\n", AliceLoader::ep1Width, AliceLoader::ep1Height);
+			WRITE_MEMORY(ASLR(0x575C9C), float, AliceLoader::ep1Height);
+			WRITE_MEMORY(ASLR(0x575CA0), float, AliceLoader::ep1Width);
 			break;
 		}
 
 		case 1:
 		{
-			printf("Game: Episode II (Beta8)\n\n"); AliceLoader::skipDLLs = true;
-			if (AliceLoader::fpsTarget != 60.f)
+			printf("Game: Episode II\n\n");
+			//WRITE_MEMORY(0x6B369C, uint8_t, 0xDC, 0x35, 0x6C, 0x14, 0x6F, 0x00) // Overwrite instruction that compares 0x742A38 and point to the target FPS
+			//WRITE_MEMORY(0x6B369C, uint8_t, 0xDC, 0x35, 0xDC, 0x6A, 0x6F, 0x00) // 6F6ADC
+			if (AliceLoader::ep2FPSTarget != 60.f)
 			{
-				printf("Setting target refresh rate to %.f\n", AliceLoader::fpsTarget);
-				WRITE_MEMORY(0x5F247C, float, AliceLoader::fpsTarget);
+				printf("Setting target refresh rate to %.f\n", AliceLoader::ep2FPSTarget);
+				WRITE_MEMORY(0x6F146C, float, AliceLoader::ep2FPSTarget);
+
+				//WRITE_MEMORY(0x6F6ADC, float, AliceLoader::ep2FPSTarget);	// Another 60.f I think
+				//WRITE_MEMORY(0x742A38, double, AliceLoader::ep2FPSTarget); // Sus Double
 			}
 			break;
 		}
+		
+		case 2:
+		{
+			printf("Game: Episode II (Beta8)\n\n");
+			AliceLoader::skipDLLs = true;
+
+			if (AliceLoader::ep2FPSTarget != 60.f)
+			{
+				printf("Setting target refresh rate to %.f\n", AliceLoader::ep2FPSTarget);
+				WRITE_MEMORY(0x5F247C, float, AliceLoader::ep2FPSTarget);
+			}
+			break;
+		}
+
+		
 
 		default:
 		{ 
@@ -103,6 +121,7 @@ void AliceLoader::IdentifyApp()
 		}
 	}
 }
+
 
 /// <summary>
 /// Launches an external program defined in the config file. Intended for use with OSA413's AMBPatcher

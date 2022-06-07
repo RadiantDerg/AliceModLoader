@@ -3,13 +3,21 @@ class AliceLoader
 {
 	static std::string exePath;
 public:
+	// AML
 	static bool enableConsole;
 	static bool waitForDebugger;
 	static bool isDebug;
 	static bool skipDLLs;
-	static float fpsTarget;
 
 	static std::string patcherDir;
+
+	// Episode 1 Specific
+	static float ep1Width;
+	static float ep1Height;
+
+	// Episode 2 Specific
+	static float ep2FPSTarget;
+	
 
 	static void TestFunc();
 	static void InitLoader();

@@ -10,6 +10,7 @@
 #include <cstdio>
 #include <iostream>
 
+#define BASE_ADDRESS 0x400000
 #include "Helpers.h"
 #include "INIReader.h"
 #include "D3D9Hook.h"

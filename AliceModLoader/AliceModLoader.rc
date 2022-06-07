@@ -51,8 +51,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 0,0,2,5
- PRODUCTVERSION 0,0,2,5
+ FILEVERSION 0,0,2,6
+ PRODUCTVERSION 0,0,2,6
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -68,12 +68,12 @@ BEGIN
         BLOCK "040904b0"
         BEGIN
             VALUE "FileDescription", "A mod loader for Sonic 4 Episodes on PC"
-            VALUE "FileVersion", "0.0.2.5"
+            VALUE "FileVersion", "0.0.2.6"
             VALUE "InternalName", "AliceModLoader.dll"
             VALUE "LegalCopyright", "Copyright (C) 2021"
             VALUE "OriginalFilename", "AliceModLoader.dll"
             VALUE "ProductName", "Alice Mod Loader"
-            VALUE "ProductVersion", "0.0.2.5"
+            VALUE "ProductVersion", "0.0.2.6"
         END
     END
     BLOCK "VarFileInfo"

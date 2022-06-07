@@ -1,5 +1,16 @@
 ﻿#pragma once
 
+#define _CONCAT2(x, y) x##y
+#define CONCAT2(x, y) _CONCAT(x, y)
+#define INSERT_PADDING(length) \
+    uint8_t CONCAT2(pad, __LINE__)[length]
+
+#define ASSERT_OFFSETOF(type, field, offset) \
+    static_assert(offsetof(type, field) == offset, "offsetof assertion failed")
+
+#define ASSERT_SIZEOF(type, size) \
+    static_assert(sizeof(type) == size, "sizeof assertion failed")
+
 #ifdef BASE_ADDRESS
 const HMODULE MODULE_HANDLE = GetModuleHandle(nullptr);
 
@@ -56,6 +67,12 @@ const HMODULE MODULE_HANDLE = GetModuleHandle(nullptr);
 #define WRITE_JUMP(location, function) \
     { \
         WRITE_MEMORY(location, uint8_t, 0xE9); \
+        WRITE_MEMORY(location + 1, uint32_t, (uint32_t)(function) - (size_t)(location) - 5); \
+    }
+
+#define WRITE_CALL(location, function) \
+    { \
+        WRITE_MEMORY(location, uint8_t, 0xE8); \
         WRITE_MEMORY(location + 1, uint32_t, (uint32_t)(function) - (size_t)(location) - 5); \
     }
 
