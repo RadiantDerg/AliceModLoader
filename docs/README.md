@@ -1,19 +1,24 @@
+<!-- <br/> - Spacer boi -->
 # AliceModLoader
  **AliceModLoader (AML)** is a *very basic DLL mod loader* for the Sonic The Hedgehog 4 PC games.†
  
 **"Alice"** is derived from Sonic 4's internal application name.
 
+<br/>
+
 ### Notice:
- I do **NOT** consider this to be in a widely usable state at all. **AML is currently hard-coded to just load 2 modules**,
- and is honestly low priority for me since I only needed something to load my in-progress code mods automatically.††
+ I do **NOT** consider this to be in a widely usable state. **AML is currently hard-coded to just load 2 modules**. This will be addressed soon.
+ 
+† This has only been actively tested with Episode 2. <i>Episode 1 is supported by extension, but remains largely un-tested</i>
 
 ### [Known Bugs](https://github.com/RadiantDerg/AliceModLoader/blob/master/docs/BugList.md)
-<!-- <br/> - Spacer boi -->
+
+<br/>
 
 ### Credits
 
- [Sajid](https://github.com/Sajidur78) - Helping me better understand Detours in general\
- [Skyth](https://github.com/blueskythlikesclouds) - Detours Helper Macros, and Helping me better understand Detours in general
+ [Sajid](https://github.com/Sajidur78) - General C++ help\
+ [Skyth](https://github.com/blueskythlikesclouds) - Helper macros, and assistance in understanding Detours
  
  <h6>(I appreciate both of them overall for dealing with my -67 IQ brain and taking time to answer my questions 🧡)</h6>
 
@@ -21,10 +26,6 @@
 
 <br/>
 
-### ⚠ You will need to clear the build events before compiling
-<h6>They simply just copy the compiled binaries to set locations on my machine, automating testing process.</h6>
+### ⚠ You will need to clear the build events before compiling ⚠
+<h6>They simply copy compiled binaries to set locations on my machine, automating the testing process.</h6>
 
-<br/>
-
-<h5>† This has only been actively tested on with Episode 2. <i>Episode 1 is supported by extension, but remains largely un-tested</i> </h5>
-<h5>†† Without having to rely on an external injection program AND without the need to patch the game executables themselves </h5>
