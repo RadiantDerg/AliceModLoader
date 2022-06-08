@@ -2,9 +2,13 @@
 # AliceModLoader
  **AliceModLoader (AML)** is a *very basic DLL mod loader* for the Sonic The Hedgehog 4 PC games.†
  
-**"Alice"** is derived from Sonic 4's internal application name.
+**"Alice"** derives from Sonic 4's internal application name.
+
+<i>The current build artifacts can be found in the <b>[UpdateServer](https://github.com/RadiantDerg/AliceModLoader/tree/main/UpdateServer)</b> folder. <b>Updates semi-regularly.</b></i>
+
 
 <br/>
+
 
 ### Notice:
  I do **NOT** consider this to be in a widely usable state. **AML is currently hard-coded to just load 2 modules**. This will be addressed soon.
@@ -13,7 +17,9 @@
 
 ### [Known Bugs](https://github.com/RadiantDerg/AliceModLoader/blob/master/docs/BugList.md)
 
+
 <br/>
+
 
 ### Credits
 
@@ -24,7 +30,9 @@
 
 ### [Open Source Licenses](https://github.com/RadiantDerg/AliceModLoader/blob/master/docs/OpenSource.md)
 
+
 <br/>
+
 
 ### ⚠ You will need to clear the build events before compiling ⚠
 <h6>They simply copy compiled binaries to set locations on my machine, automating the testing process.</h6>
