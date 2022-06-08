@@ -1,6 +1,7 @@
 #include "AliceLoader.h"
 #include "Config.h"
 
+
 bool AliceLoader::enableConsole   = false;
 bool AliceLoader::waitForDebugger = false;
 bool AliceLoader::skipDLLs        = false;
@@ -14,14 +15,43 @@ float AliceLoader::ep2FPSTarget = 60.f;
 std::string AliceLoader::patcherDir;
 
 
+HOOK(HANDLE, __stdcall, _CreateFileA, PROC_ADDRESS("Kernel32.dll", "CreateFileA"), LPCSTR lpFileName, DWORD dwDesiredAccess, DWORD dwShareMode, LPSECURITY_ATTRIBUTES lpSecurityAttributes, DWORD dwCreationDisposition, DWORD dwFlagsAndAttributes, HANDLE hTemplateFile)
+{
+	std::string path_ = lpFileName;
+	std::string workPath_ = "\\#Work\\" + path_;
+
+	std::string fileRedir = FileService::GetModuleDir().c_str() + workPath_;
+
+	if (AliceLoader::isDebug)
+	{
+		printf("File Read Detected: \"%s\"\n", path_.c_str());
+		//printf("REDIRECT PATH:      \"%s\"\n", fileRedir.c_str());
+	}
+
+	// Redirect  if the same file exists in the 'Work' folder
+	if (FileService::FileExists(fileRedir.c_str()))
+	{
+		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+		SetConsoleTextAttribute(hConsole, 11);
+		printf("Redirecting \"\\%s\" to \"%s\"\n", path_.c_str(), workPath_.c_str());
+		SetConsoleTextAttribute(hConsole, 15);
+
+		return CreateFileW(std::wstring(fileRedir.begin(), fileRedir.end()).c_str(), dwDesiredAccess, dwShareMode, lpSecurityAttributes, dwCreationDisposition, dwFlagsAndAttributes, hTemplateFile);
+	}
+	else
+		return CreateFileW(std::wstring(path_.begin(), path_.end()).c_str(), dwDesiredAccess, dwShareMode, lpSecurityAttributes, dwCreationDisposition, dwFlagsAndAttributes, hTemplateFile);
+}
+
+
 void AliceLoader::InitLoader()
 {
 #if _DEBUG
-	// For debugging steps taken before the if() statement below
+	// Debug output for steps taken before the if() statement below
 	AliceLoader::isDebug = true;
 	AllocConsole();
 	freopen("CONOUT$", "w", stdout);
 #endif
+	INSTALL_HOOK(_CreateFileA);
 
 	Config::LoadConfig();
 	if (!AliceLoader::isDebug && enableConsole)
@@ -112,8 +142,6 @@ void AliceLoader::IdentifyApp()
 			break;
 		}
 
-		
-
 		default:
 		{ 
 			printf("No known game detected!\n");
@@ -135,7 +163,7 @@ void AliceLoader::LaunchExternalPatcher()
 
 		bool patchPrc = CreateProcess(TEXT(patcherDir.c_str()), NULL, NULL, NULL, FALSE, NULL, NULL, NULL, &si, &pi);
 		if (!patchPrc)
-			std::cout << "Error creating patcher process. Error code: " << GetLastError() << std::endl;
+			std::cout << "Error creating patcher process. Error code: " << GetLastError() << std::endl << std::endl;
 
 		//BringWindowToTop((HWND)pi.dwProcessId);     Uneccessary actually
 
@@ -144,7 +172,7 @@ void AliceLoader::LaunchExternalPatcher()
 		CloseHandle(pi.hThread);
 		CloseHandle(pi.hProcess);
 	}
-	else printf("External patcher not specified, skipping...\n");
+	else printf("External patcher not specified, skipping...\n\n");
 }
 
 // This function is called in D3D9Hook.cpp @ void HookD3D9(). We do this because the executable is decompressed at this state,
@@ -224,3 +252,4 @@ void AliceLoader::LoadExternalModule_Direct(std::string filePath)
 	printf("Loading module @ \"%s\"...\n", filePath.c_str());
 	LoadDll(filePath.c_str());
 }
+

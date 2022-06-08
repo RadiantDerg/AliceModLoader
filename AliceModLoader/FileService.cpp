@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <fstream>
+#include "Shlwapi.h"
 
 const std::string FileService::GetModuleDir() // Un-optimal hack solution Xd
 {
@@ -16,4 +17,12 @@ const std::string FileService::GetModuleDir() // Un-optimal hack solution Xd
 	}
 	else
 		return &lpFilename[0];
+}
+
+bool FileService::FileExists(const char* file)
+{
+	if (PathFileExists(file))
+		return true;
+
+	return false;
 }

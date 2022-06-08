@@ -4,6 +4,7 @@ class FileService
 
 public:
 	const static std::string GetModuleDir();
+	static bool FileExists(const char* file);
 
 	static bool IsEmptyOrWhiteSpace(std::string s)
 	{

@@ -27,11 +27,9 @@ void Config::LoadConfig()
 	AliceLoader::patcherDir      = reader.Get("Config", "PatcherDir", "");
 	AliceLoader::skipDLLs        = reader.GetBoolean("Config", "DisableCodeMods", false);
 
-
 	// Episode 1
 	AliceLoader::ep1Width        = reader.GetFloat("Episode1", "Width", 1280.f);
 	AliceLoader::ep1Height       = reader.GetFloat("Episode1", "Height", 720.f);
-
 
 	// Episode 2
 	AliceLoader::ep2FPSTarget    = reader.GetFloat("Episode2", "TargetFPS", 60.f);
