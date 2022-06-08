@@ -1,7 +1,7 @@
 # Currently known list of bugs:
-* AML causes a very slow launch when the game is started from Steam. It's unknown if this is directly AML's fault, or if it's some issue on my machine.
+* Using AML causes a delayed game launch when started via Steam, unknown if this is directly related to AML or if it's some issue exclusive to my machine.
 
-* When using Korama's CPKRedir.dll, Episode 2 can sometimes soft-lock when loading files. This may be an existing issue with CPKRedir, as Sonic Generations suffers the same bug.
+* When using Korama's CPKREDIR, Episode 2 can sometimes soft-lock when loading files. This may be an existing issue as Sonic Generations suffers the same bug.
 
 
 
