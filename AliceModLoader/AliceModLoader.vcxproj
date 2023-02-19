@@ -182,6 +182,7 @@ xcopy "$(ProjectDir)bin\$(Platform)\$(Configuration)\AliceModLoader.dll" "$(Solu
     <ClInclude Include="Dependencies\Helpers.h" />
     <ClInclude Include="D3D9Hook.h" />
     <ClInclude Include="Config.h" />
+    <ClInclude Include="ModList.h" />
     <ClInclude Include="Pch.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
@@ -191,6 +192,7 @@ xcopy "$(ProjectDir)bin\$(Platform)\$(Configuration)\AliceModLoader.dll" "$(Solu
     <ClCompile Include="D3D9Hook.cpp" />
     <ClCompile Include="DllMain.cpp" />
     <ClCompile Include="Config.cpp" />
+    <ClCompile Include="ModList.cpp" />
     <ClCompile Include="Pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

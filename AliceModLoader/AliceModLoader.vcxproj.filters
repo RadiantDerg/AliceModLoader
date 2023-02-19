@@ -32,6 +32,9 @@
     <ClInclude Include="FileService.h">
       <Filter>LoaderMain</Filter>
     </ClInclude>
+    <ClInclude Include="ModList.h">
+      <Filter>LoaderMain</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="D3D9Hook.cpp">
@@ -50,6 +53,9 @@
       <Filter>DLL</Filter>
     </ClCompile>
     <ClCompile Include="FileService.cpp">
+      <Filter>LoaderMain</Filter>
+    </ClCompile>
+    <ClCompile Include="ModList.cpp">
       <Filter>LoaderMain</Filter>
     </ClCompile>
   </ItemGroup>

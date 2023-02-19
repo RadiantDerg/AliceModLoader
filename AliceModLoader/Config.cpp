@@ -34,6 +34,8 @@ void Config::LoadConfig()
 	// Episode 2
 	AliceLoader::ep2FPSTarget    = reader.GetFloat("Episode2", "TargetFPS", 60.f);
 
+	// Temporary!
+	AliceLoader::useList         = reader.GetBoolean("Config", "UserList", false);
 }
 
 void Config::GetAliceFolder()

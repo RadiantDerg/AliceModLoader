@@ -26,7 +26,10 @@ SkipWait:
 	if (AliceLoader::skipDLLs)
 		printf("Loading of external modules is disabled, skipping...\n");
 	else
-		AliceLoader::TestFunc();
+	{
+		AliceLoader::LoadCodeMods();
+		//AliceLoader::TestFunc();
+	}
 
 	AliceLoader::LaunchExternalPatcher();
 

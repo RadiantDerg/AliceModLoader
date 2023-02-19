@@ -1,11 +1,13 @@
 #include "AliceLoader.h"
 #include "Config.h"
+#include "ModList.h"
 
 
 bool AliceLoader::enableConsole   = false;
 bool AliceLoader::waitForDebugger = false;
 bool AliceLoader::skipDLLs        = false;
 bool AliceLoader::isDebug         = false;
+bool AliceLoader::useList      = false;
 
 float AliceLoader::ep1Width     = 1280.f;
 float AliceLoader::ep1Height    = 720.f;
@@ -14,7 +16,7 @@ float AliceLoader::ep2FPSTarget = 60.f;
 
 std::string AliceLoader::patcherDir;
 
-
+// Redirect file loading if a match exists in the ./#Work/ directory
 HOOK(HANDLE, __stdcall, _CreateFileA, PROC_ADDRESS("Kernel32.dll", "CreateFileA"), LPCSTR lpFileName, DWORD dwDesiredAccess, DWORD dwShareMode, LPSECURITY_ATTRIBUTES lpSecurityAttributes, DWORD dwCreationDisposition, DWORD dwFlagsAndAttributes, HANDLE hTemplateFile)
 {
 	std::string path_ = lpFileName;
@@ -28,7 +30,7 @@ HOOK(HANDLE, __stdcall, _CreateFileA, PROC_ADDRESS("Kernel32.dll", "CreateFileA"
 		//printf("REDIRECT PATH:      \"%s\"\n", fileRedir.c_str());
 	}
 
-	// Redirect  if the same file exists in the 'Work' folder
+	// Check if the same file exists & redirect
 	if (FileService::FileExists(fileRedir.c_str()))
 	{
 		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -175,29 +177,78 @@ void AliceLoader::LaunchExternalPatcher()
 	else printf("External patcher not specified, skipping...\n\n");
 }
 
-// This function is called in D3D9Hook.cpp @ void HookD3D9(). We do this because the executable is decompressed at this state,
-// allowing us to freely load in external DLL files and/or directly patch the process memory without causing SteamStub issues.
-void AliceLoader::TestFunc()
+
+void AliceLoader::ReadList()
+{
+	
+}
+
+
+// Called in D3D9Hook.cpp @ void HookD3D9(). We do this because the executable is decompressed at this state, allowing
+// us to freely load in external DLL files and/or directly patch the process memory without causing SteamStub issues.
+void AliceLoader::LoadCodeMods()
 {
 	printf("\n");
 
-	/*
-		Arg 1: DLL file to be loaded
-		Arg 2: Relative path from \AML\ to file
-		Arg 3: Friendly name (For console output, defaults to arg 1 if undefined)
+	// Read the ModList.ini
+	if (Config::configPath.empty())
+		Config::GetAliceFolder();
+	printf("Reading mod list...\n");
+	const INIReader reader(Config::configPath + "mods.ini");
+	if (reader.ParseError() != 0)
+	{
+		printf("Could not load mod list!\n");
+		return;
+	}
 
-		"EP2Debug.dll"           retrieved from:  {ModFolder}/mod.ini, [Mod] DLLFile=""
-		"Mods/Episode 2 Debug"   retrieved from:  Mod Database
-		"Episode 2 Debug"        retrieved from:  {ModFolder}/mod.ini, [Description] Title=""
-	*/
+	int num;
+	num = reader.GetInteger("LoadInfo", "Count", 0);
 
+	// Go through each listing
+	for (int i = 1; i <= num; i++)
+	{
+		ModList::ModInfo info;
+		std::string key = "Mod" + std::to_string(i);
+		std::string modFolder = reader.Get("LoadInfo", key, "");
+
+		// Load the listing's mod.ini
+		if (Config::configPath.empty())
+			Config::GetAliceFolder();
+		const INIReader reader(Config::configPath + modFolder + "\\mod.ini");
+		if (reader.ParseError() != 0)
+		{
+			printf("Could not load mod.ini!");
+			info.Dll, info.Name = "";
+			break;
+		}
+
+		info.Dll = reader.Get("Mod", "Module", "");
+		info.Name = reader.Get("Description", "Title", "");
+
+		// Load the defined module
+		LoadExternalModule(info.Dll, modFolder, info.Name);
+	}
+
+	printf("\n");
+}
+
+
+void AliceLoader::ApplyPatches()
+{
+
+}
+
+
+// Called in D3D9Hook.cpp @ void HookD3D9()
+void AliceLoader::TestFunc()
+{
+	printf("\n");
 
 	// Korama's CPKREDIR
 	LoadExternalModule("cpkredir.dll", "", "CPKREDIR");
 
 	// Ep2 Debug
 	LoadExternalModule("EP2Debug.dll", "", "Episode 2 Debug");
-
 
 	printf("\n");
 }
@@ -234,6 +285,7 @@ void LoadDll(const char* dll)
 		printf(" >> Failed to load the module!\n");
 }
 
+
 void AliceLoader::LoadExternalModule(std::string file, std::string relativePath, std::string name)
 {
 	std::string moduleDir = Config::configPath + relativePath + "\\" + file;
@@ -247,9 +299,11 @@ void AliceLoader::LoadExternalModule(std::string file, std::string relativePath,
 		printf("WARNING! Module file is undefined! Skipped \"%s\"\n", name != "" ? name.c_str() : "NO MOD NAME");
 }
 
+
 void AliceLoader::LoadExternalModule_Direct(std::string filePath)
 {
 	printf("Loading module @ \"%s\"...\n", filePath.c_str());
 	LoadDll(filePath.c_str());
 }
+
 
