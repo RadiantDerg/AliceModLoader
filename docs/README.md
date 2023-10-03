@@ -1,32 +1,28 @@
 <!-- <br/> - Spacer boi -->
-# AliceModLoader
- **AliceModLoader (AML)** is a *very basic DLL mod loader* for the Sonic The Hedgehog 4 PC games.†
+# Alice Mod Loader
+A mod loader for the Sonic The Hedgehog 4 PC games. The name **"Alice"** derives from Sonic 4's internal application name.
+
+### Features:
+- Custom Module (DLL) Loading & Initializing
+- Per-Game Patches such as **Custom EP1 Render Resolution** and **EP2 Refresh Rate Bugfix**
+- File Redirection to `.\#Work\` folder
+
  
-**"Alice"** derives from Sonic 4's internal application name.
-
-<i>The current build artifacts can be found in the <b>[UpdateServer](https://github.com/RadiantDerg/AliceModLoader/tree/main/UpdateServer)</b> folder. <b>Updates semi-regularly.</b></i>
-
-
-<br/>
-
-
-### Notice:
- I do **NOT** consider this to be in a widely usable state. **AML is currently hard-coded to just load 2 modules**. This will be addressed soon.
- 
-† This has only been actively tested with Episode 2. <i>Episode 1 is supported by extension, but remains largely un-tested</i>
+<i>The most recent build binary can be found in the <b>[UpdateServer](https://github.com/RadiantDerg/AliceModLoader/tree/main/UpdateServer)</b> folder.</i>
 
 ### [Known Bugs](https://github.com/RadiantDerg/AliceModLoader/blob/master/docs/BugList.md)
 
+### Notice: 
+This has only been actively tested with Episode 2. <i>Episode 1 is supported by extension, but remains largely un-tested</i>
+
 
 <br/>
 
 
-### Credits
+## Credits
 
  [Sajid](https://github.com/Sajidur78) - General C++ help\
- [Skyth](https://github.com/blueskythlikesclouds) - Helper macros, and assistance in understanding Detours
- 
- <h6>(I appreciate both of them overall for dealing with my -67 IQ brain and taking time to answer my questions 🧡)</h6>
+ [Skyth](https://github.com/blueskythlikesclouds) - Detours Helper macros, and assistance
 
 ### [Open Source Licenses](https://github.com/RadiantDerg/AliceModLoader/blob/master/docs/OpenSource.md)
 
@@ -36,4 +32,3 @@
 
 ### ⚠ You will need to clear the build events before compiling ⚠
 <h6>They simply copy compiled binaries to set locations on my machine, automating the testing process.</h6>
-
