@@ -1,0 +1,35 @@
+name: Build (Windows)
+
+on:
+  push:
+    branches:
+     - "**"
+  pull_request:
+    branches:
+     - "**"
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: x86
+
+      - uses: actions/checkout@v5
+        with:
+          submodules: recursive
+
+      - name: Build AliceModLoader
+        run: msbuild /p:Platform=x86 /p:Configuration=Release
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: AliceModLoader
+          path: AliceModLoader/bin/Win32/Release/AliceModLoader.dll

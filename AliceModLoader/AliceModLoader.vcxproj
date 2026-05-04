@@ -29,26 +29,26 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
@@ -104,10 +104,10 @@
       <AdditionalDependencies>detours.lib;syelog.lib;shlwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(ProjectDir)..\SharedSrc\Detours\lib\x86</AdditionalLibraryDirectories>
     </Link>
-    <PostBuildEvent>
+    <!-- <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)bin\$(Platform)\$(Configuration)\AliceModLoader.dll" "E:\Games\steamapps\common\Sonic the Hedgehog 4 - EP 2\d3d9.dll" /Y /D /F
 xcopy "$(ProjectDir)bin\$(Platform)\$(Configuration)\AliceModLoader.dll" "E:\Games\steamapps\common\Sonic the Hedgehog 4 EP 1\d3d9.dll" /Y /D /F</Command>
-    </PostBuildEvent>
+    </PostBuildEvent> -->
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -115,15 +115,15 @@ xcopy "$(ProjectDir)bin\$(Platform)\$(Configuration)\AliceModLoader.dll" "E:\Gam
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)Dependencies\Detours\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\dependencies\Detours\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>Pch.h</PrecompiledHeaderFile>
       <ForcedIncludeFiles>Pch.h</ForcedIncludeFiles>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>detours.lib;syelog.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(ProjectDir)Dependencies\Detours\lib\x64</AdditionalLibraryDirectories>
+      <AdditionalDependencies>detours.lib;syelog.lib;shlwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\dependencies\Detours\lib.X64</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -147,11 +147,11 @@ xcopy "$(ProjectDir)bin\$(Platform)\$(Configuration)\AliceModLoader.dll" "E:\Gam
       <AdditionalDependencies>detours.lib;syelog.lib;shlwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(ProjectDir)..\SharedSrc\Detours\lib\x86</AdditionalLibraryDirectories>
     </Link>
-    <PostBuildEvent>
+    <!-- <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)bin\$(Platform)\$(Configuration)\AliceModLoader.dll" "E:\Games\steamapps\common\Sonic the Hedgehog 4 - EP 2\d3d9.dll" /Y /D /F
 xcopy "$(ProjectDir)bin\$(Platform)\$(Configuration)\AliceModLoader.dll" "E:\Games\steamapps\common\Sonic the Hedgehog 4 EP 1\d3d9.dll" /Y /D /F
 xcopy "$(ProjectDir)bin\$(Platform)\$(Configuration)\AliceModLoader.dll" "$(SolutionDir)UpdateServer\d3d9.dll" /Y /D /F</Command>
-    </PostBuildEvent>
+    </PostBuildEvent> -->
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -161,7 +161,7 @@ xcopy "$(ProjectDir)bin\$(Platform)\$(Configuration)\AliceModLoader.dll" "$(Solu
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)Dependencies\Detours\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\dependencies\Detours\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>Pch.h</PrecompiledHeaderFile>
       <ForcedIncludeFiles>Pch.h</ForcedIncludeFiles>
@@ -170,8 +170,8 @@ xcopy "$(ProjectDir)bin\$(Platform)\$(Configuration)\AliceModLoader.dll" "$(Solu
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>detours.lib;syelog.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(ProjectDir)Dependencies\Detours\lib\x64</AdditionalLibraryDirectories>
+      <AdditionalDependencies>detours.lib;syelog.lib;shlwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\dependencies\Detours\lib.X64</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
